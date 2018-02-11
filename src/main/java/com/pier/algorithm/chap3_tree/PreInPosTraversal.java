@@ -116,7 +116,7 @@ public class PreInPosTraversal {
                 c = stack.peek();
                 if (c.left != null && h != c.left && h != c.right){
                     stack.push(c.left);
-                }else if (c.right != null && h != c.right){
+                }else if (c.right  != null && h != c.right){
                     stack.push(c.right);
                 }else{
                     System.out.println(stack.pop().value + " ");
@@ -125,5 +125,12 @@ public class PreInPosTraversal {
             }
         }
         System.out.println();
+    }
+
+    public int getHeightRecur(Node h, int l){
+        if (h == null){
+            return l;
+        }
+        return Math.max(getHeightRecur(h.left, l+1), getHeightRecur(h.right, l+1));
     }
 }
