@@ -1,14 +1,15 @@
 package com.pier.algorithm.chap3_tree;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author: pier
  * @date: 2018/2/10 21:39
- * @desc: 二叉树前中后遍历递归与非递归
+ * @desc: 二叉树前中后层次遍历递归与非递归
  */
 
-public class PreInPosTraversal {
+public class PreInPosLevTraversal {
 
     public class Node{
         public Node left;
@@ -127,10 +128,37 @@ public class PreInPosTraversal {
         System.out.println();
     }
 
+    public void levelOrder(Node head){
+        if (head == null){
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(head);
+        while (!queue.isEmpty()){
+            head = queue.poll();
+            System.out.println(head.value + " ");
+            if (head.left != null){
+                queue.offer(head.left);
+            }
+            if (head.right != null){
+                queue.offer(head.right);
+            }
+        }
+    }
+
     public int getHeightRecur(Node h, int l){
         if (h == null){
             return l;
         }
         return Math.max(getHeightRecur(h.left, l+1), getHeightRecur(h.right, l+1));
+    }
+
+    public static void main(String[] args) {
+        Node head = new PreInPosLevTraversal().new Node(1);
+        head.left=new PreInPosLevTraversal().new Node(2);
+        head.right=new PreInPosLevTraversal().new Node(3);
+        head.left.left=new PreInPosLevTraversal().new Node(4);
+        head.left.right=new PreInPosLevTraversal().new Node(5);
+        new PreInPosLevTraversal().levelOrder(head);
     }
 }
